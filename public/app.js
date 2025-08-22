@@ -8,7 +8,7 @@ let smartphones = [];
 const API_BASE =
   window.location.hostname.includes("localhost")
     ? "http://localhost:3000/smartphones"
-    : "https://ton-projet.onrender.com/smartphones";
+    : "https://javascriptgroupe3.onrender.com/smartphones";
 
 // Fonction pour afficher une section et cacher les autres (list, detail, add)
 function showSection(id) {
@@ -114,61 +114,45 @@ async function supprimerSmartphone(id) {
   showSection("list");
 }
 
-// Fonction pour ajouter un smartphone via formulaire
 async function ajouterSmartphone(e) {
   e.preventDefault();
   const form = e.target;
-  const file = form.photo.files[0];
-  if (!file) return alert("Veuillez sélectionner une image.");
 
-  const reader = new FileReader();
-  reader.onload = async function () {
-    const nouveauPhone = {
-      nom: form.nom.value,
-      marque: form.marque.value,
-      description: form.description.value,
-      prix: Number(form.prix.value),
-      photo: reader.result,
-      ram: form.ram.value,
-      rom: form.rom.value,
-      ecran: form.ecran.value,
-      couleurs: [form.couleurs.value]
-    };
-
-    try {
-      const res = await fetch(API_BASE, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(nouveauPhone)
-      });
-
-      if (!res.ok) throw new Error("Erreur lors de l'ajout");
-
-      const phoneAjoute = await res.json();
-      smartphones.push(phoneAjoute);
-      creerSmartphone(phoneAjoute.id, phoneAjoute.nom, phoneAjoute.prix);
-
-      form.reset();
-      showSection("list");
-      loadSmartphones();
-
-    } catch (err) {
-      console.error(err);
-      alert("Erreur lors de l'ajout.");
-    }
+  const nouveauPhone = {
+    nom: form.nom.value,
+    marque: form.marque.value,
+    description: form.description.value,
+    prix: Number(form.prix.value),
+    ram: form.ram.value,
+    rom: form.rom.value,
+    ecran: form.ecran.value,
+    couleurs: [form.couleurs.value],
+    photo: "images/default.jpg" // provisoire
   };
 
-  reader.readAsDataURL(file);
+  try {
+    const res = await fetch(API_BASE, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(nouveauPhone)
+    });
+
+    if (!res.ok) {
+      const errText = await res.text();
+      throw new Error("Erreur lors de l'ajout : " + errText);
+    }
+
+    const phoneAjoute = await res.json();
+    smartphones.push(phoneAjoute);
+    creerSmartphone(phoneAjoute.id, phoneAjoute.nom, phoneAjoute.prix);
+
+    form.reset();
+    showSection("list");
+    loadSmartphones();
+  } catch (err) {
+    console.error("❌ Erreur ajout :", err);
+    alert(err.message);
+  }
 }
 
-// Initialisation
-window.addEventListener("DOMContentLoaded", () => {
-  console.log("JS chargé !");
-  loadSmartphones();
-  showSection("list");
-
-  const formAjout = document.getElementById("form-ajout");
-  if (formAjout) {
-    formAjout.addEventListener("submit", ajouterSmartphone);
-  }
 });
