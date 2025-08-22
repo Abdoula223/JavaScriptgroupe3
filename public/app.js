@@ -8,7 +8,7 @@ let smartphones = [];
 const API_BASE =
   window.location.hostname.includes("localhost")
     ? "http://localhost:3000/smartphones"
-    : "https://ton-projet.onrender.com/smartphones";
+    : "https://javascriptgroupe3.onrender.com/smartphones";
 
 // Fonction pour afficher une section et cacher les autres (list, detail, add)
 function showSection(id) {
