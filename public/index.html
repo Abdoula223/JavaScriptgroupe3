@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gestion des Smartphones</title>
+  <script src="app.js" defer></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+  <!-- HEADER -->
+  <header class="bg-blue-600 text-white p-4 flex justify-between items-center">
+    <h1 class="text-2xl font-bold">📱 Gestion des Smartphones</h1>
+    <nav class="space-x-4">
+      <button onclick="showSection('list')" class="hover:underline">Liste</button>
+      <button onclick="showSection('add')" class="hover:underline">Ajouter</button>
+    </nav>
+  </header>
+
+  <!-- LISTE -->
+  <section id="list" class="p-6">
+    <h2 class="text-xl font-semibold mb-4">📋 Liste des smartphones</h2>
+    <div class="overflow-x-auto">
+      <table class="min-w-full bg-white shadow rounded-lg">
+        <thead>
+          <tr class="bg-gray-200 text-left">
+            <th class="px-4 py-2">ID</th>
+            <th class="px-4 py-2">Nom</th>
+            <th class="px-4 py-2">Prix</th>
+            <th class="px-4 py-2">Actions</th>
+          </tr>
+        </thead>
+        <tbody id="phones-tbody">
+          <!-- Rempli dynamiquement -->
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- DETAIL -->
+  <section id="detail" class="p-6 hidden">
+    <button onclick="showSection('list')" 
+            class="mb-4 bg-gray-600 text-white px-3 py-1 rounded hover:bg-gray-700">
+      ⬅ Retour
+    </button>
+    <div class="bg-white shadow-lg rounded-lg p-6 max-w-lg mx-auto">
+      <div id="detail-img-container" class="mb-4">
+        <!-- image ici -->
+      </div>
+      <h2 id="detail-nom" class="text-2xl font-bold mb-2"></h2>
+      <p><strong>Marque :</strong> <span id="detail-marque"></span></p>
+      <p><strong>Prix :</strong> <span id="detail-prix"></span></p>
+      <p><strong>RAM :</strong> <span id="detail-ram"></span></p>
+      <p><strong>ROM :</strong> <span id="detail-rom"></span></p>
+      <p><strong>Écran :</strong> <span id="detail-ecran"></span></p>
+      <p class="mt-2"><strong>Description :</strong></p>
+      <p id="detail-description" class="text-gray-700"></p>
+      <div class="mt-4">
+        <strong>Couleurs :</strong>
+        <div id="detail-couleurs" class="flex gap-2 mt-1"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AJOUT -->
+  <section id="add" class="p-6 hidden">
+    <button onclick="showSection('list')" 
+            class="mb-4 bg-gray-600 text-white px-3 py-1 rounded hover:bg-gray-700">
+      ⬅ Retour
+    </button>
+    <div class="bg-white shadow-lg rounded-lg p-6 max-w-lg mx-auto">
+      <h2 class="text-xl font-semibold mb-4">➕ Ajouter un smartphone</h2>
+      <form id="form-ajout" class="space-y-4">
+        <input type="text" name="nom" placeholder="Nom" required class="w-full border p-2 rounded" />
+        <input type="text" name="marque" placeholder="Marque" required class="w-full border p-2 rounded" />
+        <textarea name="description" placeholder="Description" required class="w-full border p-2 rounded"></textarea>
+        <input type="number" name="prix" placeholder="Prix (FCFA)" required class="w-full border p-2 rounded" />
+        <input type="text" name="ram" placeholder="RAM (ex: 6Go)" required class="w-full border p-2 rounded" />
+        <input type="text" name="rom" placeholder="ROM (ex: 128Go)" required class="w-full border p-2 rounded" />
+        <input type="text" name="ecran" placeholder="Écran (ex: 6.1 pouces)" required class="w-full border p-2 rounded" />
+        <input type="color" name="couleurs" value="#000000" class="w-16 h-10 border rounded" />
+        <input type="file" name="photo" accept="image/*" required class="w-full border p-2 rounded" />
+        <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+          Ajouter
+        </button>
+      </form>
+    </div>
+  </section>
+
+</body>
+</html>

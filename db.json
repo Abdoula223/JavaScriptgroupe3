@@ -1,0 +1,28 @@
+{
+  "smartphones": [
+    {
+      "id": 1,
+      "nom": "iPhone 14",
+      "marque": "Apple",
+      "description": "Dernier modèle Apple",
+      "prix": 900000,
+      "photo": "images/iphone.jpg",
+      "ram": "6Go",
+      "rom": "128Go",
+      "ecran": "6.1 pouces",
+      "couleurs": ["#000000", "#FFFFFF"]
+    },
+    {
+      "id": 2,
+      "nom": "Samsung Galaxy S23",
+      "marque": "Samsung",
+      "description": "Flagship Samsung",
+      "prix": 850000,
+      "photo": "images/samsung.jpg",
+      "ram": "8Go",
+      "rom": "256Go",
+      "ecran": "6.7 pouces",
+      "couleurs": ["#123456", "#654321"]
+    }
+  ]
+}
